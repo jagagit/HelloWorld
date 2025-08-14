@@ -1,0 +1,31 @@
+name: Hello world program
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - feature/*
+      - jagagit/*
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: action/checkout@v4
+      - name: setup java 17
+        uses: action/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: grant execution permission for gradlew
+        run: chmod +x gradlew
+
+      - name: build with gradle
+        run: ./gradlew build
+
+
